@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Sex" table="sex" catalog="bookstore">
+        <id name="sexId" type="java.lang.Integer">
+            <column name="sexId" />
+            <generator class="native" />
+        </id>
+        <property name="sexType" type="java.lang.String">
+            <column name="sexType" length="4" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

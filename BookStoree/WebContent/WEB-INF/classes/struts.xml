@@ -1,0 +1,110 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.i18n.encoding" value="gb2312"/>
+	<constant name="struts.custom.i18n.resources" value="globalMessages"/>
+	
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="userLoginCheck" class="interceptor.UserLoginCheck"></interceptor>
+		</interceptors>
+		<global-results>
+			<result name="error" type="redirect">/error.html </result>					
+		</global-results>
+		<action name="enrollAction" class="EnrollAction">
+			<result name="input">/enroll.jsp </result>
+			<result name="success">/login.jsp</result>
+		</action>
+		
+		<action name="loginAction" class="LoginAction" method="loginCheck">
+			<result name="fail">/login.jsp </result>
+			<result name="success" type="redirect">/firstPage.jsp</result>
+		</action>
+		
+		<action name="managerLoginAction" class="LoginAction" method="managerLoginCheck">
+			<result name="fail">/managerLogin.jsp </result>
+			<result name="success" type="redirect">/manage/manageWelcome.jsp</result>
+		</action>
+		
+		<action name="leftAction" class="LeftAction">
+		</action>
+		
+		<action name="allBookAction" class="AllBookAction">
+		</action>
+		
+		<action name="singleBookAction" class="SingleBookAction">
+		</action>
+		
+		<action name="bookAction" class="BookAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">
+					image/jpeg,image/gif,image/bmp,image/png
+				</param>
+				<param name="maximumSize">20000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">/manage/addBook.jsp </result>
+			<result name="success" type="redirect">/manage/addBook.jsp </result>
+		</action>
+		
+		<action name="oneTypeAction" class="OneTypeAction">
+			<result name="oneType" type="redirect">/oneType.jsp </result>
+		</action>
+		
+		<action name="userInforAction" class="UserManageAction" method="updateUserInfor">
+			<result name="success" type="redirect">/personalInformation.jsp </result>
+			<result name="fail" >/personalInformation.jsp </result>
+		</action>
+		
+		<action name="updatePasswordAction" class="UserManageAction" method="updateUserPassword">
+			<result name="success" type="redirect">/personalInformation.jsp </result>
+			<result name="fail">/updatePassword.jsp </result>
+		</action>
+		
+		<action name="ordersManageAction" class="OrdersManageAction">
+			<result name="success" type="redirect">/allOrders.jsp </result>
+		</action>
+		
+		<action name="ordersAction" class="OrdersAction">
+		</action>
+		
+		<action name="userExitAction" class="UserExitAction">
+			<result name="firstPage" type="redirect">/firstPage.jsp </result>
+			<result name="managerLogin" type="redirect">/managerLogin.jsp </result>
+		</action>
+		
+		<action name="shoppingCartAction" class="ShoppingCartAction">	
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="userLoginCheck"></interceptor-ref>
+			<result name="login" type="redirect">/login.jsp </result>			
+		</action>
+		
+		<action name="updateCartAction" class="UpdateCartAction">
+		</action>
+
+		<action name="singleOrdersAction" class="SingleOrdersAction">
+		</action>
+
+		<action name="allOrdersAction" class="AllOrdersAction">
+		</action>
+		<action name="dealOrdersAction" class="DealOrdersAction">
+		</action>
+		<action name="userInformationAction" class="UserInformationAction">
+		</action>
+		<action name="updateBookAction" class="UpdateBookAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">
+					image/jpeg,image/gif,image/bmp,image/png
+				</param>
+				<param name="maximumSize">20000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="input">/manage/updateBook.jsp?bookId=${bookId}</result>
+			<result name="success" type="redirect">/manage/updateBook.jsp?bookId=${bookId}</result>
+		</action>
+	</package>
+</struts>
+
+

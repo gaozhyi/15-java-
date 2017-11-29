@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Bargain" table="bargain" catalog="bookstore">
+        <id name="bargainId" type="java.lang.Integer">
+            <column name="bargainId" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="book" class="entity.Book" lazy="false" unique="true">
+            <column name="bookId" not-null="true" />
+        </many-to-one>
+        <property name="bookNewPrice" type="java.lang.Double">
+            <column name="bookNewPrice" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

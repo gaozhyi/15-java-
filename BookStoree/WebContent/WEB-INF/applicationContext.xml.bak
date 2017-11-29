@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="candy" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/bookstore">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="sa"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="candy" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>entity/Bargain.hbm.xml</value>
+				<value>entity/Book.hbm.xml</value>
+				<value>entity/Manager.hbm.xml</value>
+				<value>entity/Orders.hbm.xml</value>
+				<value>entity/Recommended.hbm.xml</value>
+				<value>entity/Sex.hbm.xml</value>
+				<value>entity/Type.hbm.xml</value>
+				<value>entity/User.hbm.xml</value>
+				<value>entity/Ordersbook.hbm.xml</value></list>
+		</property>
+	</bean>
+	<bean id="personManage" class="dao.PersonManage" abstract="false"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory" >
+			<ref local="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="bookManage" class="dao.BookManage" abstract="false"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory" >
+			<ref local="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="ordersManage" class="dao.OrdersManage" abstract="false"
+		lazy-init="default" autowire="default" dependency-check="default">
+		<property name="sessionFactory" >
+			<ref local="sessionFactory"/>
+		</property>
+	</bean>
+	<bean id="LoginAction" class="com.huizhi.action.LoginAction" >
+       <property name="personManage">
+           <ref bean="personManage" />
+       </property>  
+    </bean>
+	<bean id="EnrollAction" class="com.huizhi.action.EnrollAction" >
+	     <property name="personManage">
+	         <ref bean="personManage" />
+	     </property>  
+	</bean>
+	<bean id="LeftAction" class="com.huizhi.action.LeftAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+    </bean>
+	<bean id="AllBookAction" class="com.huizhi.action.AllBookAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+    </bean>
+	<bean id="SingleBookAction" class="com.huizhi.action.SingleBookAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+    </bean>
+	<bean id="BookAction" class="com.huizhi.action.BookAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+    </bean>
+	<bean id="OneTypeAction" class="com.huizhi.action.OneTypeAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+    </bean>
+	<bean id="UserManageAction" class="com.huizhi.action.UserManageAction" >
+       <property name="personManage">
+           <ref bean="personManage" />
+       </property>  
+    </bean>
+	<bean id="UserExitAction" class="com.huizhi.action.UserExitAction" >
+	</bean>
+	<bean id="UpdateCartAction" class="com.huizhi.action.UpdateCartAction" >
+	</bean>
+	<bean id="ShoppingCartAction" class="com.huizhi.action.ShoppingCartAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+    </bean>	
+	<bean id="SingleOrdersAction" class="com.huizhi.action.SingleOrdersAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+       <property name="ordersManage">
+           <ref bean="ordersManage" />
+       </property>  
+    </bean>	
+	<bean id="OrdersManageAction" class="com.huizhi.action.OrdersManageAction" >
+       <property name="ordersManage">
+           <ref bean="ordersManage" />
+       </property>  
+    </bean>	
+	<bean id="OrdersAction" class="com.huizhi.action.OrdersAction" >
+       <property name="ordersManage">
+           <ref bean="ordersManage" />
+       </property>  
+    </bean>	
+	<bean id="AllOrdersAction" class="com.huizhi.action.AllOrdersAction" >
+       <property name="ordersManage">
+           <ref bean="ordersManage" />
+       </property>  
+    </bean>	
+	<bean id="DealOrdersAction" class="com.huizhi.action.DealOrdersAction" >
+       <property name="ordersManage">
+           <ref bean="ordersManage" />
+       </property>  
+    </bean>	
+	<bean id="UserInformationAction" class="com.huizhi.action.UserInformationAction" >
+       <property name="personManage">
+           <ref bean="personManage" />
+       </property>  
+    </bean>	
+	<bean id="UpdateBookAction" class="com.huizhi.action.UpdateBookAction" >
+       <property name="bookManage">
+           <ref bean="bookManage" />
+       </property>  
+    </bean>	
+</beans>

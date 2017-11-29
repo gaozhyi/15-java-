@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Book" table="book" catalog="bookstore">
+        <id name="bookId" type="java.lang.Integer">
+            <column name="bookId" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="type" class="entity.Type" lazy="false">
+            <column name="typeId" not-null="true" />
+        </many-to-one> 
+        <property name="bookNumber" type="java.lang.String">
+            <column name="bookNumber" length="21" not-null="true" />
+        </property>
+        <property name="bookName" type="java.lang.String">
+            <column name="bookName" length="20" not-null="true" />
+        </property>
+        <property name="bookAuthor" type="java.lang.String">
+            <column name="bookAuthor" length="20" not-null="true" />
+        </property>
+        <property name="bookPress" type="java.lang.String">
+            <column name="bookPress" length="20" not-null="true" />
+        </property>
+        <property name="bookPicture" type="java.lang.String">
+            <column name="bookPicture" length="100" not-null="true" />
+        </property>
+        <property name="bookAmount" type="java.lang.Integer">
+            <column name="bookAmount" not-null="true" />
+        </property>
+        <property name="bookShelveTime" type="timestamp">
+            <column name="bookShelveTime" length="14" not-null="true" />
+        </property>
+        <property name="bookPrice" type="java.lang.Double">
+            <column name="bookPrice" precision="10" not-null="true" />
+        </property>
+        <property name="bookRemark" type="java.lang.String">
+            <column name="bookRemark" length="200" />
+        </property>
+        <property name="bookSales" type="java.lang.Integer">
+            <column name="bookSales" not-null="true" />
+        </property>            
+    </class>
+</hibernate-mapping>
