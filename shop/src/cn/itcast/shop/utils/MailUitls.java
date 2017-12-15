@@ -31,8 +31,8 @@ public class MailUitls {
 		props.put("mail.host","smtp.163.com" );
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", true);
-		final String from = "你的163邮箱";
-		final String pwd = "邮箱密码";
+		final String from = "15732159060@163.com";
+		final String pwd = "jzy961128";
 		Session session = Session.getInstance(props, new Authenticator() {
 
 			@Override
